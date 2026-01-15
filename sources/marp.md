@@ -91,12 +91,6 @@ Les slides sont séparées par `---`
 
 ---
 
-![grayscale](./marp.png)
-
-![invert](./marp.png)
-
----
-
 # Plusieurs backgrounds
 
 ---
