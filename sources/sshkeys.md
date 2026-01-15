@@ -1,15 +1,16 @@
 ---
 marp: true
-theme: default
+theme: gaia
+class:
+  - lead
+  - invert
 paginate: true
 header: SSH
 footer: Clés SSH pour Services Git
 ---
 
 # Clés SSH pour Services Git
-## Configuration d'Authentification Sécurisée
-
-Configurer les clés SSH pour GitHub, GitLab et Codeberg
+## Configuration d'Authentification Sécurisée à base de clés SSH 
 
 ---
 
@@ -17,40 +18,36 @@ Configurer les clés SSH pour GitHub, GitLab et Codeberg
 
 **Méthode d'authentification cryptographique**
 
-- **Clé publique** → Téléverser sur le service Git
-- **Clé privée** → Garder secrète sur votre machine
+- **Clé publique** → **Envoyer** sur le service Git
+- **Clé privée** → Garder **secrète** sur votre machine
 - **Pas de mots de passe nécessaires** pour les opérations Git
 - **Plus sécurisé** que l'authentification HTTPS
 
 ---
 
-# Prérequis
+# Prérequis - Outils requis 
 
-**Outils requis :**
+**Vérifier si SSH est installé**
 
-```bash
-# Vérifier si SSH est installé
+```
 ssh -V
+```
 
-# Vérifier si Git est installé
+**Vérifier si Git est installé**
+
+```
 git --version
 ```
 
 ---
 
-# Plateformes prises en charge :
-
-**Linux, macOS, Windows (Git Bash/WSL)**
-
----
-
-# Générer une clé ED25519 (recommandé)
+**Générer une clé ED25519 (recommandé)**
 
 ```
 ssh-keygen -t ed25519 -C "votre_email@exemple.com"
 ```
 
-# Pour les systèmes plus anciens (alternative RSA)
+**Pour les systèmes plus anciens (alternative RSA)**
 
 ```
 ssh-keygen -t rsa -b 4096 -C "votre_email@exemple.com"
@@ -58,20 +55,20 @@ ssh-keygen -t rsa -b 4096 -C "votre_email@exemple.com"
 
 ---
 
-Invites de commande :
+**Invites de commande :**
 
 - **Emplacement du fichier** : Appuyez sur Entrée (par défaut : ~/.ssh/id_ed25519) , recommandé de donner un nom pour chaque clef généré
 - **Phrase de passe** : Facultatif mais recommandé
 
 ---
 
-# Démarrer l'agent (Git bash)
+**Démarrer l'agent (Git bash)**
 
 ```
 eval "$(ssh-agent -s)"
 ```
 
-# Ajouter votre clé privée
+**Ajouter votre clé privée**
 
 ```
 ssh-add ~/.ssh/id_ed25519
@@ -79,10 +76,8 @@ ssh-add ~/.ssh/id_ed25519
 
 ---
 
-# Copier dans le presse-papiers (macOS)
+**Copier dans le contenu de la clef publique**
 
-
-# Windows (Git Bash)
 
 ```
 cat ~/.ssh/id\_ed25519.pub | clip
@@ -92,7 +87,7 @@ cat ~/.ssh/id\_ed25519.pub | clip
 
 # Ajouter à GitHub
 
-1. Aller à **Paramètres** → **Clés SSH et GPG**
+1. Aller dans **Paramètres** → **Clés SSH et GPG**
 2. Cliquer sur **Nouvelle clé SSH**
 3. **Titre :** Nom descriptif (par exemple, "Ordinateur Portable Professionnel")
 4. **Clé :** Coller votre clé publique
@@ -117,14 +112,14 @@ cat ~/.ssh/id\_ed25519.pub | clip
 # Tester la Connexion
 
 **GitHub :**
-```bash
+
+```
 ssh -T git@github.com
-# Résultat attendu : "Bonjour username ! Vous avez été authentifié avec succès..."
 ```
 
 ---
 
-# Plusieurs Clés SSH (Avancé)
+# Gérer plusieurs Clés SSH (Avancé)
 
 ---
 
@@ -149,7 +144,7 @@ Host gitlab.com
 
 - Utiliser une **phrase de passe** sur les **clés privées**
 - Utiliser l'algorithme **ED25519** (moderne et sécurisé)
-- Ne **jamais** partager les **clés privées**
+- Ne **JAMAIS** partager les **clés privées**
 - **Changer** les clés périodiquement
 - **Supprimer** les **anciennes** clés des services
 - Utiliser des **clés différentes** par appareil
