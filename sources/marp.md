@@ -125,8 +125,8 @@ Image en background postionné en fonction du texte à droite
 
 ---
 
-![bg right](https://picsum.photos/720?image=3)
-![bg](https://picsum.photos/720?image=20)
+![bg right](https://lipsum.app/id/30/800x600)
+![bg](https://lipsum.app/id/5/800x600)
 
 # Plusieurs background
 
