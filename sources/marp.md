@@ -12,9 +12,12 @@ footer: Présentation avec MARP
 
 [https://marp.app/](https://marp.app/)
 
+
 ---
 
 Installer l'extension **Marp for VS Code** dans **VSCODE**
+
+Le contenue de la **présentation**(**slides**) doit être rédigé en **markdown**.
 
 ---
 
