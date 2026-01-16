@@ -24,6 +24,7 @@ jobs:
           npm install -g @marp-team/marp-cli
 
       - name: Convert Markdown files in sources to PDF
+        shell: bash
         run: |
           cd sources
           shopt -s nullglob
