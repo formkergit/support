@@ -1,0 +1,39 @@
+name: Build PDFs with Marp
+
+on:
+  push:
+    branches:
+      - pdf
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    # Run the job inside a Debian container
+    container:
+      image: debian:bookworm-slim
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js, npm, and Marp CLI
+        run: |
+          apt-get update
+          apt-get install -y nodejs npm ca-certificates git
+          npm install -g @marp-team/marp-cli
+
+      - name: Convert Markdown files in sources to PDF
+        run: |
+          cd sources
+          shopt -s nullglob
+          for f in *.md; do
+            echo "Converting $f..."
+            marp --pdf "$f"
+          done
+
+      - name: Upload generated PDFs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: marp-pdfs
+          path: sources/*.pdf
